@@ -3,10 +3,10 @@ const { Wechaty } = require('wechaty');
 const spawn = require('child_process').spawn;
 
 const chatterbotServer = 'http://localhost:5000';
-const sayIntro = () => {
-    contact.say('生日快乐！');
-
-    contact.say('我是猪小二嫰儿，由猪小大嫩儿开发给池小蔫当礼物！赶紧试试调戏我吧。');
+const sayIntro = (contact) => {
+    contact.say('生日快乐！').then(() => {
+        contact.say('我是猪小二嫰儿，由猪小大嫩儿开发给池小蔫当礼物！赶紧试试调戏我吧。');
+    });
 };
 
 Wechaty.instance({ profile:'ernenr' })
@@ -30,7 +30,7 @@ Wechaty.instance({ profile:'ernenr' })
   })
   .on('friend', (contact, request) => {
     if (request) return;
-    sayIntro();
+    sayIntro(contact);
   })
   .on('error', () => {
     process.exit(1);
